@@ -28,7 +28,21 @@ class MascotaDAO():
             if c.getConex().is_connected():
                 c.closeConex()
         return result
-    
+    #TRAECLIENTE
+    def SEELECTCLIENETE(self):
+        c = self.getConex()
+        result = None
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute("select IDCLIENTE, RUNCLIENTE,  NOMBRECLIENTE, APELLIDOCLIENTE,TELEFEFONOCLIENTE,CORREOCLIENTE, from CLIENTE INNER join  CLIENTE.IDCLIENTE=MASCOTAS.IDMASCOTA")
+            result = cursor.fetchall()
+        except Exception as ex:
+            print(ex)
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return result
+        
     
     #Agrega objeto a Cargo
     def addMascota(self,mascota):
